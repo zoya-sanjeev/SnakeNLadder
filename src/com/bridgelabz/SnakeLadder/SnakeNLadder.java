@@ -9,9 +9,10 @@ public class SnakeNLadder {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int pos=0, roll=0, option=0;
+		int pos=0, roll=0, option=0, NoOfRolls=0;
 		while(pos!=100) {
 			roll=(int)Math.floor(Math.random()*6)+1;
+			NoOfRolls++;
 			option=(int)Math.floor(Math.random()*3);
 			
 		if(option==NO_PLAY)
@@ -21,8 +22,9 @@ public class SnakeNLadder {
 		else
 			pos=pos-roll<0?0:pos-roll;
 			
-		System.out.println(pos);
+		System.out.println("Position of player="+pos);
 		}
+		System.out.println("Number of time dice was rolled to win="+NoOfRolls);
 	}
 
 }
