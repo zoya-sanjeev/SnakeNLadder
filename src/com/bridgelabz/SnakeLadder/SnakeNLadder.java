@@ -8,23 +8,28 @@ public class SnakeNLadder {
 	
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int pos=0, roll=0, option=0, NoOfRolls=0;
-		while(pos!=100) {
+		int[] pos =new int[2];
+		int[] NoOfRolls =new int[2];
+		int roll=0, option=0, turn=0;
+		while(!(pos[0]!=100 || pos[1]!=100)) {
 			roll=(int)Math.floor(Math.random()*6)+1;
-			NoOfRolls++;
+			NoOfRolls[turn]++;
 			option=(int)Math.floor(Math.random()*3);
 			
 		if(option==NO_PLAY)
-			;
-		else if(option==LADDER)
-			pos=pos+roll>100?pos:pos+roll;
-		else
-			pos=pos-roll<0?0:pos-roll;
-			
-		System.out.println("Position of player="+pos);
+			turn=turn==1?0:1;
+		else if(option==LADDER) {
+			pos[turn]=pos[turn]+roll>100?pos[turn]:pos[turn]+roll;
+			turn=turn==1?1:0;
 		}
-		System.out.println("Number of time dice was rolled to win="+NoOfRolls);
+		else {
+			pos[turn]=pos[turn]-roll<0?0:pos[turn]-roll;
+			turn=turn==1?0:1;
+		}
+			
+		
+		}
+		System.out.println("Winner of the game is Player="+(pos[0]==100?1:2));
 	}
 
 }
