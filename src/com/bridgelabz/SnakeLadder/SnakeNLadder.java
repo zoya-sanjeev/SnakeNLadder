@@ -8,28 +8,43 @@ public class SnakeNLadder {
 	
 
 	public static void main(String[] args) {
-		int[] pos =new int[2];
-		int[] NoOfRolls =new int[2];
-		int roll=0, option=0, turn=0;
-		while(!(pos[0]!=100 || pos[1]!=100)) {
+		int positionOfPlayer1=0,positionOfPlayer2=0;
+		int rollsOfPlayer1=0,rollsOfPlayer2=0;
+		int roll=0, option=0, turn=1;
+		while(positionOfPlayer1<100 && positionOfPlayer2<100) {
 			roll=(int)Math.floor(Math.random()*6)+1;
-			NoOfRolls[turn]++;
+			if(turn==1)
+				rollsOfPlayer1++;
+			else
+				rollsOfPlayer2++;
 			option=(int)Math.floor(Math.random()*3);
 			
-		if(option==NO_PLAY)
-			turn=turn==1?0:1;
-		else if(option==LADDER) {
-			pos[turn]=pos[turn]+roll>100?pos[turn]:pos[turn]+roll;
-			turn=turn==1?1:0;
-		}
-		else {
-			pos[turn]=pos[turn]-roll<0?0:pos[turn]-roll;
-			turn=turn==1?0:1;
-		}
+			if(option==NO_PLAY)
+				turn=(turn==1)?2:1;
+			else if(option==LADDER) {
+				switch(turn) {
+				case 1: positionOfPlayer1=(positionOfPlayer1+roll>100?positionOfPlayer1: positionOfPlayer1+roll);
+						break;
+				case 2: positionOfPlayer2=(positionOfPlayer2+roll>100?positionOfPlayer2: positionOfPlayer1+roll);
+						break;
+				}
+				
+			}
+			else {
+				switch(turn) {
+				case 1: positionOfPlayer1=(positionOfPlayer1-roll<0?0: positionOfPlayer1-roll);
+						turn=2;
+						break;
+				case 2: positionOfPlayer1=(positionOfPlayer1-roll<0?0: positionOfPlayer1-roll);
+						turn=1;
+						break;
+				}
+			}
 			
 		
 		}
-		System.out.println("Winner of the game is Player="+(pos[0]==100?1:2));
+		int winner=positionOfPlayer1==100?1:2;
+		System.out.println("Winner of the game is Player="+winner);
 	}
 
 }
